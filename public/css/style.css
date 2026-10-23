@@ -1,0 +1,71 @@
+/* Custom Font Families */
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FAF7F2;
+  color: #242A24;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: 'Shippori Mincho', 'Cinzel', serif;
+}
+
+p, li, blockquote {
+  text-align: justify;
+  text-wrap: pretty;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Active State for Selector Buttons */
+.active-select {
+  border-color: #2E4529 !important;
+  background-color: #E6EFE2 !important;
+  color: #1F331A !important;
+  font-weight: 600 !important;
+}
+
+/* Cart badge — hidden by default, shown via JS when count > 0 */
+.cart-badge {
+  display: none;
+}
+.cart-badge.visible {
+  display: flex;
+}
+
+/* Active nav link highlight */
+.nav-link.active,
+.mobile-nav-link.active {
+  color: #273B24;
+  font-weight: 600;
+}
+.mobile-nav-link.active {
+  background-color: #EAE3D3;
+  border-radius: 0.75rem;
+}
+
+/* Scroll-to-top button */
+#scrollTopBtn.visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F2ECE1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C7BAA5;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A89B84;
+}
