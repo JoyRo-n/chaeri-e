@@ -280,4 +280,7 @@
     </div>
   </section>
 
+  <!-- WEBSITE INQUIRY SECTION (Before Footer) -->
+  @include('matcha.partials.inquiry_section')
+
 @endsection

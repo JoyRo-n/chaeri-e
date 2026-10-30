@@ -47,6 +47,7 @@
         <a href="#history" class="nav-link hover:text-[#273B24] transition-colors" data-section="history">Matcha History</a>
         <a href="#menu"    class="nav-link hover:text-[#273B24] transition-colors" data-section="menu">The Offerings</a>
         <a href="#ritual"  class="nav-link hover:text-[#273B24] transition-colors" data-section="ritual">The Whisking Art</a>
+        <a href="#website-inquiry" class="nav-link hover:text-[#273B24] transition-colors" data-section="website-inquiry">Build Your Website</a>
       </div>
 
       <!-- Right side actions -->
@@ -76,7 +77,8 @@
         <i data-lucide="cup-soda" class="w-4 h-4 text-[#5B7A52]"></i> The Offerings
       </a>
       <a href="#ritual"  class="mobile-nav-link flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-[#465344] hover:bg-[#EAE3D3] hover:text-[#273B24] transition-colors" data-section="ritual">
-        <i data-lucide="sparkles" class="w-4 h-4 text-[#5B7A52]"></i> The Whisking Art
+        <i data-lucide="sparkles" class="w-4 h-4 text-[#5B7A52]"></i> The Whisking Art</a>
+      <a href="#website-inquiry" class="mobile-nav-link flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-[#465344] hover:bg-[#EAE3D3] hover:text-[#273B24] transition-colors" data-section="website-inquiry"><i data-lucide="globe" class="w-4 h-4 text-[#5B7A52]"></i> Build Your Website
       </a>
     </div>
   </nav>

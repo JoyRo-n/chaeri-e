@@ -549,6 +549,90 @@ function initScrollToTop() {
 }
 
 // ─────────────────────────────────────────────
+// ─────────────────────────────────────────────
+//  WEBSITE INQUIRY FORM HANDLER
+// ─────────────────────────────────────────────
+
+function initWebsiteInquiryForm() {
+  const form = document.getElementById('websiteInquiryForm');
+  if (!form) return;
+
+  const alertBox = document.getElementById('inquiryAlertBox');
+  const submitBtn = document.getElementById('inquirySubmitBtn');
+  const btnText = document.getElementById('inquiryBtnText');
+  const btnIcon = document.getElementById('inquiryBtnIcon');
+  const btnSpinner = document.getElementById('inquiryBtnSpinner');
+
+  function setAlert(type, message) {
+    if (!alertBox) return;
+    alertBox.className = type === 'success'
+      ? 'mb-6 p-4 rounded-2xl bg-[#E8F3E5] border border-[#B9D8B3] text-[#22481D] flex items-start gap-3 text-xs leading-relaxed'
+      : 'mb-6 p-4 rounded-2xl bg-[#FDE8E8] border border-[#F8B4B4] text-[#9B1C1C] flex items-start gap-3 text-xs leading-relaxed';
+
+    const iconName = type === 'success' ? 'check-circle-2' : 'alert-circle';
+    alertBox.innerHTML = `
+      <i data-lucide="${iconName}" class="w-5 h-5 shrink-0 mt-0.5"></i>
+      <div>
+        <p class="font-semibold text-sm">${type === 'success' ? 'Request Sent!' : 'Submission Failed'}</p>
+        <p class="mt-0.5">${message}</p>
+      </div>
+    `;
+    alertBox.classList.remove('hidden');
+    if (window.lucide) lucide.createIcons();
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = form.querySelector('[name="name"]')?.value.trim();
+    const email = form.querySelector('[name="email"]')?.value.trim();
+    const waNumber = form.querySelector('[name="wa_number"]')?.value.trim();
+
+    if (!name || !email || !waNumber) {
+      setAlert('error', 'Please fill in all required fields (Name, Email, and WhatsApp number).');
+      return;
+    }
+
+    // Set loading state
+    submitBtn.disabled = true;
+    if (btnText) btnText.innerText = 'Submitting Request...';
+    btnIcon?.classList.add('hidden');
+    btnSpinner?.classList.remove('hidden');
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action || '/inquiries', {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json',
+          'X-CSRF-TOKEN': csrfToken(),
+        },
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setAlert('success', data.message || 'Thank you! Your request has been received. We will contact you soon on WhatsApp.');
+        form.reset();
+        showToast('Website inquiry submitted successfully!');
+      } else {
+        const errorMsg = data.message || (data.errors ? Object.values(data.errors).flat().join(' ') : 'Failed to send inquiry. Please try again.');
+        setAlert('error', errorMsg);
+      }
+    } catch (err) {
+      console.error(err);
+      setAlert('error', 'A network error occurred. Please check your connection or contact us directly on WhatsApp.');
+    } finally {
+      submitBtn.disabled = false;
+      if (btnText) btnText.innerText = 'Submit Website Consultation Request';
+      btnIcon?.classList.remove('hidden');
+      btnSpinner?.classList.add('hidden');
+    }
+  });
+}
+
 //  DOM READY — WIRE UP EVERYTHING
 // ─────────────────────────────────────────────
 
@@ -575,4 +659,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initNavHighlight();
   initScrollToTop();
+  initWebsiteInquiryForm();
 });
